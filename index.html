@@ -8,6 +8,7 @@
             padding: 0;
             background: linear-gradient(180deg, #c55bd4, #f36c3d);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -18,6 +19,15 @@
             max-width: 400px;
             background-color: rgba(255, 255, 255, 0.8);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            margin: 0;
+            padding: 10px;
+            background: linear-gradient(180deg, #c55bd4, #f36c3d);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 32px;
+            text-align: center;
         }
         p {
             margin: 5px 0;
@@ -30,8 +40,8 @@
     </style>
 </head>
 <body>
+    <h1>Donut Talk</h1>
     <div id="chat-container">
-        <h1>Donut Talk</h1>
         <input type="text" id="user-input" placeholder="Your response here" />
     </div>
     <script>
