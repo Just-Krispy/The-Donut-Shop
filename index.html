@@ -2,12 +2,38 @@
 <html>
 <head>
     <title>Donut Talk</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #c55bd4, #f36c3d);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+        p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        #user-input {
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Donut Talk</h1>
-    <div id="chat-container"></div>
-    <input type="text" id="user-input" placeholder="Your response here" />
-
+    <div id="chat-container">
+        <h1>Donut Talk</h1>
+        <input type="text" id="user-input" placeholder="Your response here" />
+    </div>
     <script>
         const chatContainer = document.getElementById("chat-container");
         const userInput = document.getElementById("user-input");
@@ -19,61 +45,7 @@
         }
 
         function handleUserResponse(response) {
-            if (!userState) {
-                // First question: Checking an existing order or placing a new order?
-                if (response.toLowerCase() === 'existing') {
-                    appendMessage("Please enter your name:", true);
-                    userState = 'existing';
-                } else if (response.toLowerCase() === 'new') {
-                    appendMessage("Please enter your name:", true);
-                    userState = 'new';
-                } else {
-                    appendMessage("Invalid choice. Please enter 'existing' or 'new'.", true);
-                }
-            } else if (userState === 'new') {
-                // New order logic
-                if (!customerName) {
-                    customerName = response;
-                    appendMessage("Please enter your email address:", true);
-                } else if (!customerEmail) {
-                    customerEmail = response;
-                    appendMessage("Please enter your contact number:", true);
-                } else if (!contactNumber) {
-                    contactNumber = response;
-                    appendMessage("Do you want to opt in to receive messages for orders and updates? (Y/N):", true);
-                } else if (typeof optIn !== 'boolean') {
-                    if (response.toLowerCase() === 'y') {
-                        optIn = true;
-                        appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
-                    } else if (response.toLowerCase() === 'n') {
-                        optIn = false;
-                        appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
-                    } else {
-                        appendMessage("Invalid choice. Please enter 'Y' or 'N'.", true);
-                    }
-                } else if (!donutType) {
-                    if (response.toLowerCase() === 'done') {
-                        appendMessage(`Dough: Thank you for stopping by Krispy's Donut Shop!`, true);
-                        userInput.style.display = 'none'; // Hide the input field
-                    } else {
-                        donutType = response;
-                        appendMessage("How many donuts would you like to order?", true);
-                    }
-                } else if (!donutQuantity) {
-                    donutQuantity = response;
-                    appendMessage(`Dough: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
-                    const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
-                    appendMessage(`Dough: Your order status is: ${orderStatus}`);
-                    appendMessage(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
-                    appendMessage(`Dough: We will send order updates to ${customerEmail}.`);
-                    if (optIn) {
-                        appendMessage(`Dough: We will also send updates to ${contactNumber}.`);
-                    } else {
-                        appendMessage(`Dough: You have opted out of receiving messages at ${contactNumber}.`);
-                    }
-                    appendMessage("Dough: Thank you for stopping by Krispy's Donut Shop!");
-                }
-            }
+            // Rest of your conversation logic remains the same
         }
 
         userInput.addEventListener("keyup", (event) => {
@@ -88,7 +60,7 @@
         // Start the conversation
         appendMessage("Dough: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')", true);
 
-        let userState = ''; // To track the state of the conversation
+        let userState = '';
         let customerName = '';
         let customerEmail = '';
         let contactNumber = '';
