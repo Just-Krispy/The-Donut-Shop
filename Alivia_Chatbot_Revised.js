@@ -6,16 +6,38 @@ function generateChatNumber(customerNumber, orderNumber) {
 }
 
 function checkOrderStatus() {
+    let customerName, customerNumber, orderNumber, donutType, donutQuantity;
+
     rl.question("Please enter your name: ", (name) => {
-        rl.question("Please enter your 5-digit customer number: ", (customerNumber) => {
-            rl.question("Please enter your 8-digit order number: ", (orderNumber) => {
-                console.log(`Hello, ${name}! An agent will be with you shortly.`);
-                const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
-                console.log(`Agent: Thank you for waiting. I am checking the order status for you.`);
-                console.log(`Agent: Your order status is: ${orderStatus}`);
-                const chatNumber = generateChatNumber(customerNumber, orderNumber);
-                console.log(`Agent: Your chat reference number is: ${chatNumber}`);
-                rl.close();
+        customerName = name;
+        rl.question("Please enter your 5-digit customer number: ", (cNumber) => {
+            customerNumber = cNumber;
+            rl.question("Please enter your 8-digit order number: ", (oNumber) => {
+                orderNumber = oNumber;
+
+                console.log(`Hello, ${customerName}! An agent will be with you shortly.`);
+
+                function askForDonutOrder() {
+                    rl.question("Please specify the type of donut you want or type 'done' to complete your order: ", (type) => {
+                        if (type.toLowerCase() === 'done') {
+                            console.log("Agent: Thank you for stopping by Krispy's Donut Shop!");
+                            rl.close();
+                        } else {
+                            donutType = type;
+                            rl.question("How many donuts would you like to order? ", (quantity) => {
+                                donutQuantity = quantity;
+
+                                console.log(`Agent: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
+                                const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
+                                console.log(`Agent: Your order status is: ${orderStatus}`);
+                                console.log(`Agent: You have ordered ${donutQuantity} ${donutType} donut(s).`);
+                                askForDonutOrder();
+                            });
+                        }
+                    });
+                }
+
+                askForDonutOrder();
             });
         });
     });
