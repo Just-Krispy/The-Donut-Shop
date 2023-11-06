@@ -16,28 +16,34 @@
             chatContainer.appendChild(messageElement);
         }
 
-        function askForName() {
-            appendMessage("Agent: Please enter your name:");
-            const nameInput = document.createElement("input");
-            nameInput.type = "text";
-            chatContainer.appendChild(nameInput);
+        function startChat() {
+            appendMessage("Agent: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new'):");
 
-            nameInput.addEventListener("keyup", (event) => {
+            const userInput = document.createElement("input");
+            userInput.type = "text";
+            chatContainer.appendChild(userInput);
+
+            userInput.addEventListener("keyup", (event) => {
                 if (event.key === "Enter") {
-                    const name = nameInput.value;
-                    chatContainer.removeChild(nameInput);
-                    appendMessage(`You: Hello, my name is ${name}.`);
+                    const choice = userInput.value;
+                    chatContainer.removeChild(userInput);
 
-                    // Continue the flow with more questions or actions here
-                    // For example, ask for the type of donut, quantity, email, and more.
-
-                    // After gathering all information, provide responses as needed
+                    if (choice.toLowerCase() === 'existing') {
+                        // Handle existing order logic here
+                        // You can continue with name, customer number, order number, etc.
+                    } else if (choice.toLowerCase() === 'new') {
+                        // Handle new order logic here
+                        // You can continue with name, email, contact number, donut order, etc.
+                    } else {
+                        appendMessage("Agent: Invalid choice. Please enter 'existing' or 'new'.");
+                        startChat(); // Restart the chat
+                    }
                 }
             });
         }
 
         // Start the conversation
-        askForName();
+        startChat();
     </script>
 </body>
 </html>
