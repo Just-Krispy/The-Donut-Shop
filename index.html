@@ -18,8 +18,8 @@
             text-align: center;
             border: 1px solid #ccc;
             padding: 10px;
-            max-width: 600px;
-            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         }
         h1 {
             background: linear-gradient(180deg, #c55bd4, #f36c3d);
@@ -33,7 +33,7 @@
             font-size: 16px;
         }
         #user-input {
-            width: 80%;
+            width: 100%;
             padding: 10px;
         }
     </style>
@@ -41,6 +41,7 @@
 <body>
     <h1>Donut Talk</h1>
     <div id="chat-container">
+        <p>Dough: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')</p>
         <input type="text" id="user-input" placeholder="Your response here" />
     </div>
     <script>
@@ -67,7 +68,7 @@
         });
 
         // Start the conversation
-        appendMessage("Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')", true);
+        appendMessage("Your response here", true);
 
         let userState = '';
         let customerName = '';
