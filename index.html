@@ -14,7 +14,7 @@
 
         function appendMessage(message, isAgent) {
             const messageElement = document.createElement("p");
-            messageElement.textContent = isAgent ? `Agent: ${message}` : `You: ${message}`;
+            messageElement.textContent = isAgent ? `Dough: ${message}` : `You: ${message}`;
             chatContainer.appendChild(messageElement);
         }
 
@@ -53,7 +53,7 @@
                     }
                 } else if (!donutType) {
                     if (response.toLowerCase() === 'done') {
-                        appendMessage(`Agent: Thank you for stopping by Krispy's Donut Shop!`, true);
+                        appendMessage(`Dough: Thank you for stopping by Krispy's Donut Shop!`, true);
                         userInput.style.display = 'none'; // Hide the input field
                     } else {
                         donutType = response;
@@ -61,17 +61,17 @@
                     }
                 } else if (!donutQuantity) {
                     donutQuantity = response;
-                    console.log(`Agent: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
+                    console.log(`Dough: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
                     const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
-                    console.log(`Agent: Your order status is: ${orderStatus}`);
-                    console.log(`Agent: You have ordered ${donutQuantity} ${donutType} donut(s).`);
-                    console.log(`Agent: We will send order updates to ${customerEmail}.`);
+                    console.log(`Dough: Your order status is: ${orderStatus}`);
+                    console.log(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
+                    console.log(`Dough: We will send order updates to ${customerEmail}.`);
                     if (optIn) {
-                        console.log(`Agent: We will also send updates to ${contactNumber}.`);
+                        console.log(`Dough: We will also send updates to ${contactNumber}.`);
                     } else {
-                        console.log(`Agent: You have opted out of receiving messages at ${contactNumber}.`);
+                        console.log(`Dough: You have opted out of receiving messages at ${contactNumber}.`);
                     }
-                    console.log("Agent: Thank you for stopping by Krispy's Donut Shop!");
+                    console.log("Dough: Thank you for stopping by Krispy's Donut Shop!");
                 }
             }
         }
@@ -86,7 +86,7 @@
         });
 
         // Start the conversation
-        appendMessage("Agent: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')", true);
+        appendMessage("Dough: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')", true);
 
         let userState = ''; // To track the state of the conversation
         let customerName = '';
