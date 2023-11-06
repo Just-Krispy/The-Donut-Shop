@@ -61,17 +61,17 @@
                     }
                 } else if (!donutQuantity) {
                     donutQuantity = response;
-                    console.log(`Dough: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
+                    appendMessage(`Dough: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
                     const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
-                    console.log(`Dough: Your order status is: ${orderStatus}`);
-                    console.log(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
-                    console.log(`Dough: We will send order updates to ${customerEmail}.`);
+                    appendMessage(`Dough: Your order status is: ${orderStatus}`);
+                    appendMessage(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
+                    appendMessage(`Dough: We will send order updates to ${customerEmail}.`);
                     if (optIn) {
-                        console.log(`Dough: We will also send updates to ${contactNumber}.`);
+                        appendMessage(`Dough: We will also send updates to ${contactNumber}.`);
                     } else {
-                        console.log(`Dough: You have opted out of receiving messages at ${contactNumber}.`);
+                        appendMessage(`Dough: You have opted out of receiving messages at ${contactNumber}.`);
                     }
-                    console.log("Dough: Thank you for stopping by Krispy's Donut Shop!");
+                    appendMessage("Dough: Thank you for stopping by Krispy's Donut Shop!");
                 }
             }
         }
