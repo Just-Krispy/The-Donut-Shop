@@ -17,65 +17,35 @@
         }
 
         function startChat() {
-            appendMessage("Agent: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new'):");
-
             const userInput = document.createElement("input");
             userInput.type = "text";
             chatContainer.appendChild(userInput);
 
-            userInput.addEventListener("keyup", (event) => {
-                if (event.key === "Enter") {
-                    const choice = userInput.value;
-                    chatContainer.removeChild(userInput);
+            function continueChat(message) {
+                appendMessage(message);
 
-                    if (choice.toLowerCase() === 'existing') {
-                        // Handle existing order logic here
-                        appendMessage("Agent: Please enter your name:");
-                        const nameInput = document.createElement("input");
-                        nameInput.type = "text";
-                        chatContainer.appendChild(nameInput);
-
-                        nameInput.addEventListener("keyup", (event) => {
-                            if (event.key === "Enter") {
-                                const customerName = nameInput.value;
-                                chatContainer.removeChild(nameInput);
-
-                                appendMessage("Agent: Please enter your 5-digit customer number:");
-                                const customerNumberInput = document.createElement("input");
-                                customerNumberInput.type = "text";
-                                chatContainer.appendChild(customerNumberInput);
-
-                                customerNumberInput.addEventListener("keyup", (event) => {
-                                    if (event.key === "Enter") {
-                                        const customerNumber = customerNumberInput.value;
-                                        chatContainer.removeChild(customerNumberInput);
-
-                                        appendMessage("Agent: Please enter your 8-digit order number:");
-                                        const orderNumberInput = document.createElement("input");
-                                        orderNumberInput.type = "text";
-                                        chatContainer.appendChild(orderNumberInput);
-
-                                        orderNumberInput.addEventListener("keyup", (event) => {
-                                            if (event.key === "Enter") {
-                                                const orderNumber = orderNumberInput.value;
-                                                chatContainer.removeChild(orderNumberInput);
-
-                                                // You can proceed with the order status logic here using customerName, customerNumber, and orderNumber.
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    } else if (choice.toLowerCase() === 'new') {
-                        // Handle new order logic here
-                        // You can continue with name, email, contact number, donut order, etc.
-                    } else {
-                        appendMessage("Agent: Invalid choice. Please enter 'existing' or 'new'.");
-                        startChat(); // Restart the chat
+                userInput.addEventListener("keyup", (event) => {
+                    if (event.key === "Enter") {
+                        const response = userInput.value;
+                        userInput.value = ""; // Clear the input field
+                        handleUserResponse(response);
                     }
+                });
+            }
+
+            function handleUserResponse(response) {
+                if (response.toLowerCase() === 'existing') {
+                    // Handle existing order logic here
+                    continueChat("Agent: Please enter your name:");
+                } else if (response.toLowerCase() === 'new') {
+                    // Handle new order logic here
+                    continueChat("Agent: Please enter your name:");
+                } else {
+                    continueChat("Agent: Invalid choice. Please enter 'existing' or 'new'.");
                 }
-            });
+            }
+
+            continueChat("Agent: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new'):");
         }
 
         // Start the conversation
