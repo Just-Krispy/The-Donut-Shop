@@ -23,8 +23,8 @@
         }
         h1 {
             color: #fff;
-            font-size: 48px; /* Increase the font size */
-            margin-top: 10px; /* Move it further up on the page */
+            font-size: 48px;
+            margin-top: 10px;
         }
         p {
             margin: 5px 0;
@@ -45,13 +45,13 @@
     <script>
         const chatContainer = document.getElementById("chat-container");
         const userInput = document.getElementById("user-input");
-        const messageElement = document.getElementById("message"); // Added message element
+        const messageElement = document.getElementById("message");
 
         function appendMessage(message, isAgent) {
             const messageText = isAgent ? `Dough: ${message}` : `You: ${message}`;
             const messageParagraph = document.createElement("p");
             messageParagraph.textContent = messageText;
-            chatContainer.insertBefore(messageParagraph, userInput); // Insert the message before the input field
+            chatContainer.insertBefore(messageParagraph, userInput);
         }
 
         function handleUserResponse(response) {
@@ -66,7 +66,6 @@
                     appendMessage("Invalid choice. Please enter 'existing' or 'new'.", true);
                 }
             } else if (userState === 'new') {
-                // New order logic
                 if (!customerName) {
                     customerName = response;
                     appendMessage("Please enter your email address:", true);
@@ -89,7 +88,7 @@
                 } else if (!donutType) {
                     if (response.toLowerCase() === 'done') {
                         appendMessage(`Dough: Thank you for stopping by Krispy's Donut Shop!`, true);
-                        userInput.style.display = 'none'; // Hide the input field
+                        userInput.style.display = 'none';
                     } else {
                         donutType = response;
                         appendMessage("How many donuts would you like to order?", true);
@@ -97,7 +96,7 @@
                 } else if (!donutQuantity) {
                     donutQuantity = response;
                     appendMessage(`Dough: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
-                    const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
+                    const orderStatus = "In Progress";
                     appendMessage(`Dough: Your order status is: ${orderStatus}`);
                     appendMessage(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
                     appendMessage(`Dough: We will send order updates to ${customerEmail}.`);
@@ -114,7 +113,7 @@
         userInput.addEventListener("keyup", (event) => {
             if (event.key === "Enter") {
                 const response = userInput.value;
-                userInput.value = ""; // Clear the input field
+                userInput.value = "";
                 appendMessage(response, false);
                 handleUserResponse(response);
             }
