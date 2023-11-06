@@ -21,6 +21,9 @@
             max-width: 400px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         }
+        #chat-container p {
+            text-align: left; /* Left-align the chat text */
+        }
         h1 {
             color: #fff;
             font-size: 48px;
@@ -55,11 +58,13 @@
         }
 
         function handleUserResponse(response) {
+            response = response.toLowerCase(); // Convert the response to lowercase for case-insensitive comparisons
+
             if (!userState) {
-                if (response.toLowerCase() === 'existing') {
+                if (response === 'existing') {
                     userState = 'existing';
                     appendMessage("Please enter your name:", true);
-                } else if (response.toLowerCase() === 'new') {
+                } else if (response === 'new') {
                     userState = 'new';
                     appendMessage("Please enter your name:", true);
                 } else {
@@ -76,17 +81,17 @@
                     contactNumber = response;
                     appendMessage("Do you want to opt in to receive messages for orders and updates? (Y/N):", true);
                 } else if (typeof optIn !== 'boolean') {
-                    if (response.toLowerCase() === 'y') {
+                    if (response === 'y') {
                         optIn = true;
                         appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
-                    } else if (response.toLowerCase() === 'n') {
+                    } else if (response === 'n') {
                         optIn = false;
                         appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
                     } else {
                         appendMessage("Invalid choice. Please enter 'Y' or 'N'.", true);
                     }
                 } else if (!donutType) {
-                    if (response.toLowerCase() === 'done') {
+                    if (response === 'done') {
                         appendMessage(`Dough: Thank you for stopping by Krispy's Donut Shop!`, true);
                         userInput.style.display = 'none';
                     } else {
