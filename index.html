@@ -19,16 +19,46 @@
         }
 
         function handleUserResponse(response) {
-            // Handle user responses here based on the current context
-            // For example, check if the response matches specific keywords or patterns
-            // Then, display the next question or message for the user
-            // You can continue the conversation logic in this function
-            if (response.toLowerCase() === 'existing') {
-                appendMessage("Please enter your name:", false);
-            } else if (response.toLowerCase() === 'new') {
-                appendMessage("Please enter your name:", false);
-            } else {
-                appendMessage("Invalid choice. Please enter 'existing' or 'new.", true);
+            if (!userState) {
+                // First question: Checking an existing order or placing a new order?
+                if (response.toLowerCase() === 'existing') {
+                    appendMessage("Please enter your name:", true);
+                    userState = 'existing';
+                } else if (response.toLowerCase() === 'new') {
+                    appendMessage("Please enter your name:", true);
+                    userState = 'new';
+                } else {
+                    appendMessage("Invalid choice. Please enter 'existing' or 'new'.", true);
+                }
+            } else if (userState === 'new') {
+                // New order logic
+                if (!customerName) {
+                    customerName = response;
+                    appendMessage("Please enter your email address:", true);
+                } else if (!customerEmail) {
+                    customerEmail = response;
+                    appendMessage("Please enter your contact number:", true);
+                } else if (!contactNumber) {
+                    contactNumber = response;
+                    appendMessage("Do you want to opt in to receive messages for orders and updates? (Y/N):", true);
+                } else if (!optIn) {
+                    if (response.toLowerCase() === 'y') {
+                        optIn = true;
+                        appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
+                    } else if (response.toLowerCase() === 'n') {
+                        optIn = false;
+                        appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
+                    } else {
+                        appendMessage("Invalid choice. Please enter 'Y' or 'N'.", true);
+                    }
+                } else {
+                    if (response.toLowerCase() === 'done') {
+                        appendMessage("Agent: Thank you for stopping by Krispy's Donut Shop!", true);
+                    } else {
+                        donutType = response;
+                        appendMessage("How many donuts would you like to order?", true);
+                    }
+                }
             }
         }
 
@@ -42,7 +72,14 @@
         });
 
         // Start the conversation
-        appendMessage("Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')", true);
+        appendMessage("Agent: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')", true);
+
+        let userState = ''; // To track the state of the conversation
+        let customerName = '';
+        let customerEmail = '';
+        let contactNumber = '';
+        let optIn = false;
+        let donutType = '';
     </script>
 </body>
 </html>
