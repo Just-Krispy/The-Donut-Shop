@@ -41,7 +41,7 @@
                 } else if (!contactNumber) {
                     contactNumber = response;
                     appendMessage("Do you want to opt in to receive messages for orders and updates? (Y/N):", true);
-                } else if (!optIn) {
+                } else if (typeof optIn !== 'boolean') {
                     if (response.toLowerCase() === 'y') {
                         optIn = true;
                         appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
@@ -51,13 +51,27 @@
                     } else {
                         appendMessage("Invalid choice. Please enter 'Y' or 'N'.", true);
                     }
-                } else {
+                } else if (!donutType) {
                     if (response.toLowerCase() === 'done') {
-                        appendMessage("Agent: Thank you for stopping by Krispy's Donut Shop!", true);
+                        appendMessage(`Agent: Thank you for stopping by Krispy's Donut Shop!`, true);
+                        userInput.style.display = 'none'; // Hide the input field
                     } else {
                         donutType = response;
                         appendMessage("How many donuts would you like to order?", true);
                     }
+                } else if (!donutQuantity) {
+                    donutQuantity = response;
+                    console.log(`Agent: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
+                    const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
+                    console.log(`Agent: Your order status is: ${orderStatus}`);
+                    console.log(`Agent: You have ordered ${donutQuantity} ${donutType} donut(s).`);
+                    console.log(`Agent: We will send order updates to ${customerEmail}.`);
+                    if (optIn) {
+                        console.log(`Agent: We will also send updates to ${contactNumber}.`);
+                    } else {
+                        console.log(`Agent: You have opted out of receiving messages at ${contactNumber}.`);
+                    }
+                    console.log("Agent: Thank you for stopping by Krispy's Donut Shop!");
                 }
             }
         }
@@ -78,8 +92,9 @@
         let customerName = '';
         let customerEmail = '';
         let contactNumber = '';
-        let optIn = false;
+        let optIn;
         let donutType = '';
+        let donutQuantity = '';
     </script>
 </body>
 </html>
