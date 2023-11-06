@@ -61,17 +61,9 @@
                     }
                 } else if (!donutQuantity) {
                     donutQuantity = response;
-                    console.log(`Agent: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
-                    const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
-                    console.log(`Agent: Your order status is: ${orderStatus}`);
-                    console.log(`Agent: You have ordered ${donutQuantity} ${donutType} donut(s).`);
-                    console.log(`Agent: We will send order updates to ${customerEmail}.`);
-                    if (optIn) {
-                        console.log(`Agent: We will also send updates to ${contactNumber}.`);
-                    } else {
-                        console.log(`Agent: You have opted out of receiving messages at ${contactNumber}.`);
-                    }
-                    console.log("Agent: Thank you for stopping by Krispy's Donut Shop!");
+                    // This is where you can add the order status logic
+                    // You can continue the conversation here and display the order status.
+                    // You can also send updates to customerEmail and contactNumber as needed.
                 }
             }
         }
