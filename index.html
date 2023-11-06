@@ -13,6 +13,50 @@
             align-items: center;
             height: 100vh;
         }
+
+        #donut-container {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        .donut {
+            width: 100px;
+            height: 100px;
+            background: #D2B48C; /* Light Brown */
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .icing {
+            width: 80px;
+            height: 80px;
+            background: #FFF; /* White */
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .sprinkle {
+            width: 10px;
+            height: 10px;
+            background: #F00; /* Red (you can use other colors) */
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        /* Place sprinkles randomly */
+        .sprinkle:nth-child(1) {
+            top: 20px;
+            left: 20px;
+        }
+
+        .sprinkle:nth-child(2) {
+            top: 30px;
+            left: 50px;
+        }
+
         #chat-container {
             background: rgba(255, 255, 255, 0.8);
             text-align: center;
@@ -21,17 +65,19 @@
             max-width: 400px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         }
+
         h1 {
             background: linear-gradient(180deg, #c55bd4, #f36c3d);
             -webkit-background-clip: text;
             color: transparent;
             font-size: 32px;
-            z-index: 1;
         }
+
         p {
             margin: 5px 0;
             font-size: 16px;
         }
+
         #user-input {
             width: 100%;
             padding: 10px;
@@ -40,6 +86,14 @@
 </head>
 <body>
     <h1>Donut Talk</h1>
+    <div id="donut-container">
+        <div class="donut">
+            <div class="icing">
+                <div class="sprinkle"></div>
+                <div class="sprinkle"></div>
+            </div>
+        </div>
+    </div>
     <div id="chat-container">
         <p>Dough: Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')</p>
         <input type="text" id="user-input" placeholder="Your response here" />
