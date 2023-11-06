@@ -30,7 +30,7 @@ function checkOrderStatus() {
                                 console.log(`Agent: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
                                 const orderStatus = "In Progress"; // You can change this to "Delayed" or "Shipped"
                                 console.log(`Agent: Your order status is: ${orderStatus}`);
-                                console.log(`Agent: You have ordered ${donutQuantity} ${donutType} donut(s).`);
+                                console.log(`Agent: You have ordered ${donutQuantity} ${donutType} donut(s). Thank you for stopping by Krispy's Donut Shop!`);
                                 askForDonutOrder();
                             });
                         }
