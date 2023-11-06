@@ -39,6 +39,7 @@
 <body>
     <h1>Donut Talk</h1>
     <div id="chat-container">
+        <p>Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')</p>
         <input type="text" id="user-input" placeholder="Your response here" />
     </div>
     <script>
@@ -65,6 +66,8 @@
         });
 
         // Start the conversation
+        appendMessage("Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')", true);
+
         let userState = '';
         let customerName = '';
         let customerEmail = '';
