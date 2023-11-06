@@ -30,7 +30,43 @@
 
                     if (choice.toLowerCase() === 'existing') {
                         // Handle existing order logic here
-                        // You can continue with name, customer number, order number, etc.
+                        appendMessage("Agent: Please enter your name:");
+                        const nameInput = document.createElement("input");
+                        nameInput.type = "text";
+                        chatContainer.appendChild(nameInput);
+
+                        nameInput.addEventListener("keyup", (event) => {
+                            if (event.key === "Enter") {
+                                const customerName = nameInput.value;
+                                chatContainer.removeChild(nameInput);
+
+                                appendMessage("Agent: Please enter your 5-digit customer number:");
+                                const customerNumberInput = document.createElement("input");
+                                customerNumberInput.type = "text";
+                                chatContainer.appendChild(customerNumberInput);
+
+                                customerNumberInput.addEventListener("keyup", (event) => {
+                                    if (event.key === "Enter") {
+                                        const customerNumber = customerNumberInput.value;
+                                        chatContainer.removeChild(customerNumberInput);
+
+                                        appendMessage("Agent: Please enter your 8-digit order number:");
+                                        const orderNumberInput = document.createElement("input");
+                                        orderNumberInput.type = "text";
+                                        chatContainer.appendChild(orderNumberInput);
+
+                                        orderNumberInput.addEventListener("keyup", (event) => {
+                                            if (event.key === "Enter") {
+                                                const orderNumber = orderNumberInput.value;
+                                                chatContainer.removeChild(orderNumberInput);
+
+                                                // You can proceed with the order status logic here using customerName, customerNumber, and orderNumber.
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
                     } else if (choice.toLowerCase() === 'new') {
                         // Handle new order logic here
                         // You can continue with name, email, contact number, donut order, etc.
