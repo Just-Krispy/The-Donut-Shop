@@ -36,29 +36,33 @@
         #user-input {
             width: 80%;
             padding: 10px;
+            color: white; /* Make user responses white */
+        }
+        .system-message {
+            color: #8B4513; /* Dark brown for system's questions */
         }
     </style>
 </head>
 <body>
     <h1>Donut Talk</h1>
     <div id="chat-container">
-        <p id="message">Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')</p>
+        <p class="system-message">Are you checking an existing order or would you like to place a new order? (Enter 'existing' or 'new')</p>
         <input type="text" id="user-input" placeholder="Your response here" />
     </div>
     <script>
         const chatContainer = document.getElementById("chat-container");
         const userInput = document.getElementById("user-input");
-        const messageElement = document.getElementById("message");
 
         function appendMessage(message, isAgent) {
             const messageText = isAgent ? `Dough: ${message}` : `You: ${message}`;
             const messageParagraph = document.createElement("p");
             messageParagraph.textContent = messageText;
+            messageParagraph.className = isAgent ? "system-message" : "user-response";
             chatContainer.insertBefore(messageParagraph, userInput);
         }
 
         function handleUserResponse(response) {
-            response = response.toLowerCase(); // Convert the response to lowercase for case-insensitive comparisons
+            response = response.toLowerCase();
 
             if (!userState) {
                 if (response === 'existing') {
@@ -100,7 +104,7 @@
                     }
                 } else if (!donutQuantity) {
                     donutQuantity = response;
-                    appendMessage(`Dough: Thank you for waiting, ${customerName}. I am checking the order status for you.`);
+                    appendMessage(`Thank you for waiting, ${customerName}. I am checking the order status for you.`);
                     const orderStatus = "In Progress";
                     appendMessage(`Dough: Your order status is: ${orderStatus}`);
                     appendMessage(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
