@@ -16,6 +16,10 @@ body {
         font-size: 1.5em; /* Adjust font size for smaller screens */
     }
 
+    h1 {
+        font-size: 2.5em; /* Adjust font size for the header text */
+    }
+
     .logo {
         max-width: 80%; /* Adjust the maximum width for the logo */
         height: auto; /* Maintain aspect ratio */
