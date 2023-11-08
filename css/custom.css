@@ -17,11 +17,11 @@ body {
     }
 
     h1 {
-        font-size: 2em; /* Adjust font size for the header text */
+        font-size: 1em; /* Adjust font size for the header text */
     }
 
     .logo {
-        max-width: 80%; /* Adjust the maximum width for the logo */
+        max-width: 70%; /* Adjust the maximum width for the logo */
         height: auto; /* Maintain aspect ratio */
     }
 }
