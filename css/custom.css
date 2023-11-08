@@ -13,11 +13,11 @@ body {
 /* Add media queries for mobile devices */
 @media (max-width: 768px) {
     body {
-        font-size: 1.5em; /* Adjust font size for smaller screens */
+        font-size: 1em; /* Adjust font size for smaller screens */
     }
 
     h1 {
-        font-size: 2.5em; /* Adjust font size for the header text */
+        font-size: 3em; /* Adjust font size for the header text */
     }
 
     .logo {
