@@ -2,7 +2,7 @@ const chatContainer = document.getElementById("chat-container");
 const userInput = document.getElementById("user-input");
 
 function appendMessage(message, isAgent) {
-    const messageText = isAgent ? `Dough: ${message}` : `You: ${message}`;
+    const messageText = isAgent ? ` ${message}` : ` ${message}`;
     const messageParagraph = document.createElement("p");
     messageParagraph.textContent = messageText;
     messageParagraph.className = isAgent ? "system-message" : "user-response";
@@ -44,7 +44,7 @@ function handleUserResponse(response) {
             }
         } else if (!donutType) {
             if (response === 'done') {
-                appendMessage(`Dough: Thank you for stopping by Krispy's Donut Shop!`, true);
+                appendMessage(`Thank you for stopping by Krispy's Donut Shop!`, true);
                 userInput.style.display = 'none';
             } else {
                 donutType = response;
@@ -54,15 +54,15 @@ function handleUserResponse(response) {
             donutQuantity = response;
             appendMessage(`Thank you for waiting, ${customerName}. I am checking the order status for you.`);
             const orderStatus = "In Progress";
-            appendMessage(`Dough: Your order status is: ${orderStatus}`);
-            appendMessage(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
-            appendMessage(`Dough: We will send order updates to ${customerEmail}.`);
+            appendMessage(`Your order status is: ${orderStatus}`);
+            appendMessage(`You have ordered ${donutQuantity} ${donutType} donut(s).`);
+            appendMessage(`We will send order updates to ${customerEmail}.`);
             if (optIn) {
-                appendMessage(`Dough: We will also send updates to ${contactNumber}.`);
+                appendMessage(`We will also send updates to ${contactNumber}.`);
             } else {
-                appendMessage(`Dough: You have opted out of receiving messages at ${contactNumber}.`);
+                appendMessage(`You have opted out of receiving messages at ${contactNumber}.`);
             }
-            appendMessage("Dough: Thank you for stopping by Krispy's Donut Shop!");
+            appendMessage("Thank you for stopping by Krispy's Donut Shop!");
         }
     }
 
