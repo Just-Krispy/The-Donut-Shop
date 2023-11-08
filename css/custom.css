@@ -10,6 +10,18 @@ body {
     font-size: 2em;
 }
 
+/* Add media queries for mobile devices */
+@media (max-width: 768px) {
+    body {
+        font-size: 1.5em; /* Adjust font size for smaller screens */
+    }
+
+    .logo {
+        max-width: 80%; /* Adjust the maximum width for the logo */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+
 .container {
     max-width: 100%;
 }
@@ -49,17 +61,4 @@ h1 {
 .system-message {
     color: #8B4513;
     font-size: 1em;
-}
-
-/* Media query for mobile devices */
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 1.5em; /* Adjust the font size for smaller screens */
-    }
-    #chat-container {
-        width: 100%; /* Make the chat container full width on smaller screens */
-    }
-    #user-input {
-        width: 100%; /* Make the user input field full width on smaller screens */
-    }
 }
