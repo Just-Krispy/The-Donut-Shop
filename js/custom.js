@@ -11,10 +11,68 @@ function appendMessage(message, isAgent) {
 
 function handleUserResponse(response) {
     response = response.toLowerCase();
+
+    if (!userState) {
+        if (response === 'existing') {
+            userState = 'existing';
+            appendMessage("Please enter your name:", true);
+        } else if (response === 'new') {
+            userState = 'new';
+            appendMessage("Please enter your name:", true);
+        } else {
+            appendMessage("Invalid choice. Please enter 'existing' or 'new'.", true);
+        }
+    } else if (userState === 'new') {
+        if (!customerName) {
+            customerName = response;
+            appendMessage("Please enter your email address:", true);
+        } else if (!customerEmail) {
+            customerEmail = response;
+            appendMessage("Please enter your contact number:", true);
+        } else if (!contactNumber) {
+            contactNumber = response;
+            appendMessage("Do you want to opt in to receive messages for orders and updates? (Y/N):", true);
+        } else if (typeof optIn !== 'boolean') {
+            if (response === 'y') {
+                optIn = true;
+                appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
+            } else if (response === 'n') {
+                optIn = false;
+                appendMessage("Please specify the type of donut you want or type 'done' to complete your order:", true);
+            } else {
+                appendMessage("Invalid choice. Please enter 'Y' or 'N'.", true);
+            }
+        } else if (!donutType) {
+            if (response === 'done') {
+                appendMessage(`Dough: Thank you for stopping by Krispy's Donut Shop!`, true);
+                userInput.style.display = 'none';
+            } else {
+                donutType = response;
+                appendMessage("How many donuts would you like to order?", true);
+            }
+        } else if (!donutQuantity) {
+            donutQuantity = response;
+            appendMessage(`Thank you for waiting, ${customerName}. I am checking the order status for you.`);
+            const orderStatus = "In Progress";
+            appendMessage(`Dough: Your order status is: ${orderStatus}`);
+            appendMessage(`Dough: You have ordered ${donutQuantity} ${donutType} donut(s).`);
+            appendMessage(`Dough: We will send order updates to ${customerEmail}.`);
+            if (optIn) {
+                appendMessage(`Dough: We will also send updates to ${contactNumber}.`);
+            } else {
+                appendMessage(`Dough: You have opted out of receiving messages at ${contactNumber}.`);
+            }
+            appendMessage("Dough: Thank you for stopping by Krispy's Donut Shop!");
+        }
+    }
+
+    // After handling the response, scroll the chat container to see the latest message
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
 userInput.addEventListener("keyup", (event) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || event.key === "Return") {
+        event.preventDefault(); // Prevent the default behavior of "Enter" key (form submission)
         const response = userInput.value;
         userInput.value = "";
         appendMessage(response, false);
