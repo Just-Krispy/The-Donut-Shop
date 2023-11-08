@@ -7,6 +7,15 @@ function appendMessage(message, isAgent) {
     messageParagraph.textContent = messageText;
     messageParagraph.className = isAgent ? "system-message" : "user-response";
     chatContainer.insertBefore(messageParagraph, userInput);
+
+    if (messageText.includes("Thank you for stopping by Krispy's Donut Shop!")) {
+        triggerSprinkleAnimation();
+    }
+}
+
+function triggerSprinkleAnimation() {
+    const sprinkleContainer = document.getElementById("sprinkle-container");
+    sprinkleContainer.classList.add("active");
 }
 
 function handleUserResponse(response) {
@@ -24,8 +33,9 @@ function handleUserResponse(response) {
         }
     } else if (userState === 'new') {
         if (!customerName) {
-            customerName = response;
-            appendMessage("Please enter your email address:", true);
+            // Capitalize the first letter of the customer's name
+            customerName = response.charAt(0).toUpperCase() + response.slice(1);
+            appendMessage(`Please enter your email address, ${customerName}:`, true);
         } else if (!customerEmail) {
             customerEmail = response;
             appendMessage("Please enter your contact number:", true);
