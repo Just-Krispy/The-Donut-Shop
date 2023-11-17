@@ -9,7 +9,7 @@ function appendMessage(message, isAgent) {
 
     chatContainer.insertBefore(messageParagraph, userInput);
 
-    const lastMessage = document.querySelector("#chat-container p:last");
+    const lastMessage = document.querySelector("#chat-container p:last-child");
     if (lastMessage) {
         lastMessage.classList.add("success-message");
     }
@@ -51,9 +51,11 @@ function handleUserResponse(response) {
         } else if (!donutQuantity) {
             donutQuantity = response;
 
+            
             appendMessage("Thank you, your order has been placed and you will be notified. Thank you for checking out Donut Talk!", false);
-            document.querySelector("#chat-container p:last").classList.add("success-message");
+            document.querySelector("#chat-container p:last-child").classList.add("success-message");
 
+            
             resetUserState();
         }
     }
@@ -71,7 +73,7 @@ function resetUserState() {
     optIn = undefined;
     donutType = '';
     donutQuantity = '';
-    userInput.style.display = 'none';  
+    userInput.style.display = 'none';  // Hiding the input field after order completion
 }
 
 userInput.addEventListener("keyup", (event) => {
