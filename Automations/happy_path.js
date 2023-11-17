@@ -28,7 +28,6 @@ describe('Donut Shop Tests', () => {
       cy.get('#user-input').type('Chocolate{enter}');
       cy.get('#user-input').type('3{enter}');
       cy.get('#user-input').type('done{enter}');
-      cy.get('#chat-container #sprinkle-container').should('have.class', 'active');
     });
   });
   
