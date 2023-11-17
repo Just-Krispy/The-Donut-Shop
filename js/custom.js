@@ -10,7 +10,7 @@ function appendMessage(message, isAgent) {
 }
 
 function handleUserResponse(response) {
-    response = response.toLowerCase();
+    response = response.trim().toLowerCase(); // Trim to remove leading/trailing whitespaces
 
     if (!userState) {
         if (response === 'existing') {
@@ -23,13 +23,24 @@ function handleUserResponse(response) {
             appendMessage("Invalid choice. Please enter 'existing' or 'new'.", true);
         }
     } else if (userState === 'new') {
-        // ... your existing logic ...
+        if (!customerName) {
+            customerName = response.charAt(0).toUpperCase() + response.slice(1);
+            appendMessage(`Please enter your email address, ${customerName}:`, true);
+        } else if (!customerEmail) {
+            customerEmail = response;
+            appendMessage("Please enter your contact number:", true);
+        } else if (!contactNumber) {
+            contactNumber = response;
+            appendMessage("Do you want to opt in to receive messages for orders and updates? (Y/N):", true);
+        } else if (typeof optIn !== 'boolean') {
+            // ... existing logic ...
 
-        if (response === 'done') {
-            appendMessage(`Thank you for stopping by Krispy's Donut Shop!`, true);
-            userInput.style.display = 'none';
-            // Scroll to the bottom
-            window.scrollTo(0, document.body.scrollHeight + 1000);
+            if (response === 'done') {
+                appendMessage(`Thank you for stopping by Krispy's Donut Shop!`, true);
+                userInput.style.display = 'none';
+                // Scroll to the bottom
+                window.scrollTo(0, document.body.scrollHeight + 1000);
+            }
         }
     }
 
