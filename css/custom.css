@@ -66,3 +66,7 @@ h1 {
     color: #8B4513;
     font-size: 1em;
 }
+
+.success-message {
+    color: pink !important;
+}

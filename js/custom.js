@@ -10,7 +10,7 @@ function appendMessage(message, isAgent) {
 }
 
 function handleUserResponse(response) {
-    response = response.trim().toLowerCase(); // Trim to remove leading/trailing whitespaces
+    response = response.trim().toLowerCase();
 
     if (!userState) {
         if (response === 'existing') {
@@ -33,14 +33,35 @@ function handleUserResponse(response) {
             contactNumber = response;
             appendMessage("Do you want to opt in to receive messages for orders and updates? (Y/N):", true);
         } else if (typeof optIn !== 'boolean') {
-            // ... existing logic ...
-
-            if (response === 'done') {
-                appendMessage(`Thank you for stopping by Krispy's Donut Shop!`, true);
-                userInput.style.display = 'none';
-                // Scroll to the bottom
-                window.scrollTo(0, document.body.scrollHeight + 1000);
+            if (response === 'y') {
+                optIn = true;
+                appendMessage("Please specify the type of donut you want?", true);
+            } else if (response === 'n') {
+                optIn = false;
+                // Move to the next question
+                appendMessage("Please specify the type of donut you want?", true);
+            } else {
+                appendMessage("Invalid choice. Please enter 'Y' or 'N'.", true);
             }
+        } else if (!donutType) {
+            donutType = response;
+            appendMessage("How many donuts would you like to order?", true);
+        } else if (!donutQuantity) {
+            donutQuantity = response;
+
+            // Customize the success message here
+            appendMessage(`Thank you, your order has been placed and you will be notified via the provided contact information. Thank you for checking out Donut Talk!`, false);
+            document.querySelector("#chat-container p:last-child").classList.add("success-message");
+
+            // Clearing user state and other variables for a fresh start
+            userState = '';
+            customerName = '';
+            customerEmail = '';
+            contactNumber = '';
+            optIn = undefined;
+            donutType = '';
+            donutQuantity = '';
+            userInput.style.display = 'none';  // Hiding the input field after order completion
         }
     }
 
