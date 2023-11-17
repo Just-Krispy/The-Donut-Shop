@@ -33,7 +33,7 @@ function handleUserResponse(response) {
         }
     } else if (userState === 'new') {
         if (!customerName) {
-            // Capitalize the first letter of the customer's name
+            
             customerName = response.charAt(0).toUpperCase() + response.slice(1);
             appendMessage(`Please enter your email address, ${customerName}:`, true);
         } else if (!customerEmail) {
@@ -76,13 +76,20 @@ function handleUserResponse(response) {
         }
     }
 
-    // After handling the response, scroll the chat container to see the latest message
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+    
+    setTimeout(() => {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        
+        if (response === 'done') {
+            window.scrollTo(0, document.body.scrollHeight + 1000); 
+        }
+    }, 0);
 }
 
 userInput.addEventListener("keyup", (event) => {
     if (event.key === "Enter" || event.key === "Return") {
-        event.preventDefault(); // Prevent the default behavior of "Enter" key (form submission)
+        event.preventDefault(); 
         const response = userInput.value;
         userInput.value = "";
         appendMessage(response, false);
