@@ -6,18 +6,21 @@ function appendMessage(message, isAgent) {
     const messageParagraph = document.createElement("p");
     messageParagraph.textContent = messageText;
     messageParagraph.className = isAgent ? "system-message" : "user-response";
+
     chatContainer.insertBefore(messageParagraph, userInput);
+
+    const lastMessage = document.querySelector("#chat-container p:last");
+    if (lastMessage) {
+        lastMessage.classList.add("success-message");
+    }
 }
 
 function handleUserResponse(response) {
     response = response.trim().toLowerCase();
 
     if (!userState) {
-        if (response === 'existing') {
-            userState = 'existing';
-            appendMessage("Please enter your name:", true);
-        } else if (response === 'new') {
-            userState = 'new';
+        if (response === 'existing' || response === 'new') {
+            userState = response;
             appendMessage("Please enter your name:", true);
         } else {
             appendMessage("Invalid choice. Please enter 'existing' or 'new'.", true);
@@ -38,7 +41,6 @@ function handleUserResponse(response) {
                 appendMessage("Please specify the type of donut you want?", true);
             } else if (response === 'n') {
                 optIn = false;
-                // Move to the next question
                 appendMessage("Please specify the type of donut you want?", true);
             } else {
                 appendMessage("Invalid choice. Please enter 'Y' or 'N'.", true);
@@ -49,25 +51,27 @@ function handleUserResponse(response) {
         } else if (!donutQuantity) {
             donutQuantity = response;
 
-            // Customize the success message here
-            appendMessage(`Thank you, your order has been placed and you will be notified via the provided contact information. Thank you for checking out Donut Talk!`, false);
-            document.querySelector("#chat-container p:last-child").classList.add("success-message");
+            appendMessage("Thank you, your order has been placed and you will be notified. Thank you for checking out Donut Talk!", false);
+            document.querySelector("#chat-container p:last").classList.add("success-message");
 
-            // Clearing user state and other variables for a fresh start
-            userState = '';
-            customerName = '';
-            customerEmail = '';
-            contactNumber = '';
-            optIn = undefined;
-            donutType = '';
-            donutQuantity = '';
-            userInput.style.display = 'none';  // Hiding the input field after order completion
+            resetUserState();
         }
     }
 
     setTimeout(() => {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }, 0);
+}
+
+function resetUserState() {
+    userState = '';
+    customerName = '';
+    customerEmail = '';
+    contactNumber = '';
+    optIn = undefined;
+    donutType = '';
+    donutQuantity = '';
+    userInput.style.display = 'none';  
 }
 
 userInput.addEventListener("keyup", (event) => {
