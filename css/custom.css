@@ -6,24 +6,23 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family:fantasy;
+    font-family: fantasy;
     font-size: 2em;
 }
 
-/* Add media queries for mobile devices */
 @media (max-width: 768px) {
     body {
-        font-size: 1em; /* Adjust font size for smaller screens */
+        font-size: 1em;
     }
 
     h1 {
-        font-size: 1em; /* Adjust font size for the header text */
-        font-family:fantasy; 
+        font-size: 1em;
+        font-family: fantasy;
     }
 
     .logo {
-        max-width: 70%; /* Adjust the maximum width for the logo */
-        height: auto; /* Maintain aspect ratio */
+        max-width: 70%;
+        height: auto;
     }
 }
 
