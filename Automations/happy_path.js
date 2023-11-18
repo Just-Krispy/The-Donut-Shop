@@ -19,7 +19,7 @@ describe('Donut Shop Tests', () => {
       cy.get('#chat-container .system-message').should('exist');
     });
   
-    it('tests sprinkle animation', () => {
+    it('test e2e', () => {
       cy.get('#user-input').type('new{enter}');
       cy.get('#user-input').type('John Doe{enter}');
       cy.get('#user-input').type('john.doe@example.com{enter}');
